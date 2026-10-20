@@ -1,9 +1,43 @@
+
+#[derive(Debug)]
+pub enum Num {
+    Int(usize),
+    Float(f64)
+}
+
+#[derive(Debug)]
+pub enum BinaryOp {
+    Add,
+    Sub,
+    Mul,
+    Div
+}
+
+#[derive(Debug)]
+pub enum UnaryOp {
+    Neg,
+    Len
+}
+
+#[derive(Debug)]
+pub enum ConditionalOp {
+    And,
+    Not,
+    Equal,
+    NotEqual,
+    LessThan,
+    GreaterThan,
+    LessThanEqual,
+    GreaterThanEqual
+}
+
+#[derive(Debug)]
 pub enum Token {
     Local,
     Identifier(String),
     Assignment,
     
-    NumLiteral(usize),
+    NumLiteral(Num),
     StrLiteral(String),
 
     LBracket,
@@ -19,24 +53,14 @@ pub enum Token {
     End,
 
     // Conditional Ops
-    Not,
-    Eq,
-    NotEq,
-    LT,
-    GT,
-    LTe,
-    GTe,
+    CondOp(ConditionalOp),
 
     // Binary Ops
-    Add,
-    Sub,
-    Mul,
-    Div,
-    Exp,
+    BinOp(BinaryOp),
 
     // Unary ops
-    Neg,
-    Len, // #
+    UnOp(UnaryOp),
 
+    Unknown(String), // String containing the unknown
     Terminator // End of Statement Semi-colon or New line
 }
